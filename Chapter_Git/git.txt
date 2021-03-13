@@ -1,0 +1,5 @@
+1. 回到上一个版本：git reset --hard HEAD~ （已commit）
+2. 查看提交日志：git log
+3. 撤销修改：git reset HEAD <file>
+4. 添加远程仓库：git remote add origin 邮箱名称
+5. 将本地代码上传到远程仓库：git push -u origin master
