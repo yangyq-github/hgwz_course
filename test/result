@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="yangyanqin" name="pytest" skipped="0" tests="2" time="0.062" timestamp="2021-03-18T15:00:45.760702"><testcase classname="test.test_calc.TestCalc" name="test_add[int]" time="0.001" /><testcase classname="test.test_calc.TestCalc" name="test_add[0]" time="0.001" /></testsuite></testsuites>
