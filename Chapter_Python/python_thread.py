@@ -12,6 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 loops = [2, 4]
 
+
 # def loop_0():
 #     logging.info("start loop0 at " + ctime())
 #     sleep(4)
@@ -22,8 +23,8 @@ loops = [2, 4]
 #     logging.info("start loop1 at " + ctime())
 #     sleep(2)
 #     logging.info("end  loop1 at " + ctime())
-
-
+#
+#
 # def main():
 #     logging.info("start all at " + ctime())
 #     _thread.start_new_thread(loop_0,())
@@ -62,42 +63,6 @@ loops = [2, 4]
 
 # threading
 
-# def loop(nloop, nsec):
-#     logging.info("start loop " + str(nloop) + " at " + ctime())
-#     sleep(nsec)
-#     logging.info("end loop " + str(nloop) + " at " + ctime())
-#
-# def main():
-#     logging.info("start all at " + ctime())
-#     nloops = range(len(loops))
-#     threads = []
-#
-#     for i in nloops:
-#         lock = threading.Thread(target=loop, args=(i, loops[i]))
-#         threads.append(lock)
-#
-#     # 启动子线程
-#     for i in nloops:
-#         threads[i].start()
-#
-#     for i in nloops:
-#         threads[i].join()
-#
-#     logging.info("end all at " + ctime())
-
-
-# 继承 Thread
-
-class MyThread(threading.Thread):
-    def __init__(self,func,args,name=''):
-        threading.Thread.__init__(self)
-        self.func=func
-        self.args=args
-        self.name=name
-
-    def run(self):
-        self.func(*self.args)
-
 def loop(nloop, nsec):
     logging.info("start loop " + str(nloop) + " at " + ctime())
     sleep(nsec)
@@ -109,7 +74,7 @@ def main():
     threads = []
 
     for i in nloops:
-        lock = MyThread(loop, (i, loops[i]),loop.__name__)
+        lock = threading.Thread(target=loop, args=(i, loops[i]))
         threads.append(lock)
 
     # 启动子线程
@@ -122,7 +87,45 @@ def main():
     logging.info("end all at " + ctime())
 
 
-#原语：解决了数据的互斥访问
+# 继承 Thread
+
+class MyThread(threading.Thread):
+    def __init__(self, func, args, name=''):
+        threading.Thread.__init__(self)
+        self.func = func
+        self.args = args
+        self.name = name
+
+    def run(self):
+        self.func(*self.args)
+
+
+# def loop(nloop, nsec):
+#     logging.info("start loop " + str(nloop) + " at " + ctime())
+#     sleep(nsec)
+#     logging.info("end loop " + str(nloop) + " at " + ctime())
+#
+#
+# def main():
+#     logging.info("start all at " + ctime())
+#     nloops = range(len(loops))
+#     threads = []
+#
+#     for i in nloops:
+#         lock = MyThread(loop, (i, loops[i]), loop.__name__)
+#         threads.append(lock)
+#
+#     # 启动子线程
+#     for i in nloops:
+#         threads[i].start()
+#
+#     for i in nloops:
+#         threads[i].join()
+#
+#     logging.info("end all at " + ctime())
+
+
+# 原语：解决了数据的互斥访问
 # 锁/信号量
 
 if __name__ == '__main__':
