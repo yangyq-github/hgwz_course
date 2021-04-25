@@ -9,4 +9,9 @@ from appium.webdriver.common.mobileby import MobileBy
 
 class Main(BasePage):
     def goto_search(self):
-        self.find(MobileBy.ID, 'tv_search').click()
+        # self.find(MobileBy.ID, 'tv_search').click()
+        self.steps("../page/main.yml")
+
+
+    def goto_window(self):
+        self.find(MobileBy.ID,"")

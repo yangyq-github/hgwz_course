@@ -3,7 +3,7 @@
 # @Time  : 2021/4/22 9:54
 # @File  : app.py
 # __author__ = 'yangyanqin'
-from appium.webdriver import webdriver
+from appium import webdriver
 
 from Chapter_Ui_Auto.page.base_page import BasePage
 from Chapter_Ui_Auto.page.main import Main
@@ -21,10 +21,12 @@ class App(BasePage):
             caps["appPackage"] = self._package
             caps["appActivity"] = self._activity
             caps["noReset"] = True
+            # 配置的数据驱动
+            # caps["uid"] = yaml.safe_load(open("../page/configuration.yml"))["caps"]["uid"]
             # 初始化 driver
             self._driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", caps)
         else:
-            self._driver.start_activity(self._package,self._activity)
+            self._driver.start_activity(self._package, self._activity)
 
         self._driver.implicitly_wait(20)
         return self
