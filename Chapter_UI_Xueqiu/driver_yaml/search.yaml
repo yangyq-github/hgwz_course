@@ -1,0 +1,10 @@
+- by: xpath
+  locator: "//*[@resource-id='com.xueqiu.android:id/search_input_text']"
+  action: send
+  value: 阿里巴巴
+- by: xpath
+  locator: "//*[@resource-id='com.xueqiu.android:id/name' and @text='阿里巴巴-SW']"
+  action: action
+- by: xpath
+  locator: "//*[@text='阿里巴巴-SW' and @resource-id='com.xueqiu.android:id/stockName']/../..//*[@text='加自选']"
+  action: action

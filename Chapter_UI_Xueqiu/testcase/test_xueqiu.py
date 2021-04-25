@@ -11,8 +11,6 @@ class TestXueqiu:
         self.app = App()
 
     def test_market(self):
-        search=self.app.start().goto_main().goto_market().goto_search()
+        search = self.app.start().goto_main().goto_market().goto_search()
         search.search("阿里巴巴")
         assert search.is_choosen("阿里巴巴")
-
-    

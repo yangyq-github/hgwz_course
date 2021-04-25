@@ -14,7 +14,7 @@ class App(BasePage):
     _activity = ".view.WelcomeActivityAlias"
 
     def start(self):
-        if self.drvier is None:
+        if self.driver is None:
             caps = dict()
             caps["platformName"] = "android"
             caps["deviceName"] = "127.0.0.1:7555"
@@ -24,9 +24,10 @@ class App(BasePage):
             # 初始化 driver
             self.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", caps)
         else:
+            # start_activity(packagename, activityname) 可以启动其它的应用的页面
             # self.driver.start_activity(self._package, self._activity)
             # launch_app() 这个方法不需要传入任何参数，会自动启动起来 DesireCapa 里面定位的 activtiy
-            self.drvier.launch_app()
+            self.driver.launch_app()
 
         self.driver.implicitly_wait(10)
         return self
