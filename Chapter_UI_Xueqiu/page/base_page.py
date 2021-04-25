@@ -3,6 +3,9 @@
 # @Time  : 2021/4/23 11:22
 # @File  : base_page.py
 # __author__ = 'yangyanqin'
+import json
+
+
 import yaml
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
@@ -16,9 +19,16 @@ class BasePage:
     ]
     _max_err_num = 3
     _error_num = 0
+    _params = {}
 
     def __init__(self, driver: WebDriver = None):
         self.driver = driver
+
+
+
+    def screenshot(self,path):
+        # 截图
+        self.driver.save_screenshot(path)
 
     @handle_black
     def find(self, by, locator=None):
@@ -73,9 +83,16 @@ class BasePage:
         """设置隐式等待"""
         self.driver.implicitly_wait(second)
 
-    def steps_analysis_yaml(self, path):
+    def steps_analysis_yaml(self, path, name):
         with open(path, encoding='utf-8') as f:
-            steps = yaml.safe_load(f)
+            steps = yaml.safe_load(f)[name]
+            # 对 yaml 文件中的参数做处理
+            raw = json.dumps(steps)
+            for key, value in self._params.items():
+                # repr 把对象转换成 str
+                raw = raw.replace('${' + key + '}', repr(value))
+            steps = json.loads(raw)
+            # 对 yaml 文件中的测试步骤进行判断
             for step in steps:
                 if "action" in step.keys():
                     action = step["action"]
@@ -86,3 +103,7 @@ class BasePage:
                     if "len > 0" == action:
                         eles = self.finds(step["by"], step["locator"])
                         return len(eles) > 0
+
+
+    def back(self):
+        self.driver.back()

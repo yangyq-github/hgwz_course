@@ -10,17 +10,20 @@ from Chapter_UI_Xueqiu.page.base_page import BasePage
 
 class Search(BasePage):
     def search(self,stock_name):
-        """搜索功能"""
+        # """搜索功能"""
         # self.find(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/search_input_text']").send_keys("阿里巴巴")
         # self.find(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/name' and @text='阿里巴巴-SW']").click()
         # self.find(By.XPATH,
         #           f"//*[@text='{stock_name}' and @resource-id='com.xueqiu.android:id/stockName']/../..//*[@text='加自选']").click()
+
         # 测试步骤驱动化
-        self.steps_analysis_yaml("../driver_yaml/search.yaml")
+        self._params["stock_name"]=stock_name
+        self.steps_analysis_yaml("../driver_yaml/search.yaml","search")
 
 
 
     def is_choosen(self,stock_name):
-        eles = self.finds(By.XPATH,
-                          f"//*[@text='{stock_name}' and @resource-id='com.xueqiu.android:id/stockName']/../..//*[@text='已添加']")
-        return eles.__len__() > 0
+        # eles = self.finds(By.XPATH,
+        #                   f"//*[@text='{stock_name}' and @resource-id='com.xueqiu.android:id/stockName']/../..//*[@text='已添加']")
+        # return eles.__len__() > 0
+        return self.steps_analysis_yaml("../driver_yaml/search.yaml","is_choose")

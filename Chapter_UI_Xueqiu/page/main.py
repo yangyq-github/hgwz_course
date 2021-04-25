@@ -18,7 +18,7 @@ class MainPage(BasePage):
         # self.find(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/post_status']").click()
         # self.find(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/tab_name' and @text='行情']").click()
         # 测试步骤的数据驱动实现
-        self.steps_analysis_yaml("../driver_yaml/main.yaml")
+        self.steps_analysis_yaml("../driver_yaml/main.yaml","goto_market")
         # with open("../driver_yaml/main.yaml", encoding='utf-8') as f:
         #     steps = yaml.safe_load(f)
         #

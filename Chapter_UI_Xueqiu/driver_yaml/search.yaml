@@ -1,10 +1,16 @@
-- by: xpath
-  locator: "//*[@resource-id='com.xueqiu.android:id/search_input_text']"
-  action: send
-  value: 阿里巴巴
-- by: xpath
-  locator: "//*[@resource-id='com.xueqiu.android:id/name' and @text='阿里巴巴-SW']"
-  action: action
-- by: xpath
-  locator: "//*[@text='阿里巴巴-SW' and @resource-id='com.xueqiu.android:id/stockName']/../..//*[@text='加自选']"
-  action: action
+search:
+  - by: xpath
+    locator: "//*[@resource-id='com.xueqiu.android:id/search_input_text']"
+    action: send
+    value: ${stock_name}
+  - by: xpath
+    locator: "//*[@resource-id='com.xueqiu.android:id/name' and @text=${stock_name}]"
+    action: click
+  - by: xpath
+    locator: "//*[@text=${stock_name} and @resource-id='com.xueqiu.android:id/stockName']/../..//*[@text='加自选']"
+    action: click
+
+is_choose:
+  - by: xpath
+    locator: "//*[@text=${stock_name} and @resource-id='com.xueqiu.android:id/stockName']/../..//*[@text='已添加']"
+    action: len > 0
